@@ -1,0 +1,18 @@
+NORTHSTAR SUPPORT - SAMPLE KNOWLEDGE BASE
+
+This is a fictional sample document included for testing the local RAG application.
+
+SUPPORT HOURS
+Northstar Support is available Monday to Friday, from 8:00 AM to 5:00 PM East Africa Time. The support desk is closed on public holidays. Urgent system outages can be reported through the emergency support form at any time.
+
+ACCOUNT ACCESS
+A user who cannot sign in should first confirm that Caps Lock is off and that the correct work email address is being used. If the password is forgotten, the user should select "Forgot password" on the sign-in page. The password reset link expires after 30 minutes. If the reset email does not arrive, the user should check the spam folder and then contact the support desk.
+
+DATA BACKUP
+Standard customer workspaces are backed up every 24 hours. The backup process begins at 1:00 AM East Africa Time. A restore request must include the workspace name, the approximate date of the missing information, and the name of the person making the request. The support team reviews restore requests during normal support hours.
+
+BILLING QUESTIONS
+Billing questions should include the invoice number and the billing email address. The support team aims to acknowledge billing requests within two business days. Acknowledgement does not mean that a refund has been approved.
+
+SECURITY
+Support staff will never ask a user to disclose their password or one-time authentication code. Users should report suspicious sign-in notifications immediately and change their password from the official sign-in page.

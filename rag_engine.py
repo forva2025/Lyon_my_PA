@@ -35,6 +35,28 @@ class RAGError(RuntimeError):
     """An actionable error that can be shown in the Streamlit interface."""
 
 
+def canonical_ollama_model_name(model_name: str) -> str:
+    """Return an Ollama model name with its implicit ``:latest`` tag expanded."""
+    normalized = model_name.strip().casefold()
+    if not normalized:
+        return normalized
+
+    final_component = normalized.rsplit("/", 1)[-1]
+    if ":" not in final_component and "@" not in final_component:
+        normalized = f"{normalized}:latest"
+    return normalized
+
+
+def ollama_model_is_installed(required: str, installed: list[str] | set[str]) -> bool:
+    """Check a configured model against names returned by Ollama's tags API."""
+    required_name = canonical_ollama_model_name(required)
+    return required_name in {
+        canonical_ollama_model_name(model_name)
+        for model_name in installed
+        if model_name
+    }
+
+
 def split_into_chunks(
     text: str,
     chunk_size: int = CHUNK_SIZE,
@@ -169,10 +191,9 @@ class LocalRAGEngine:
         if not status["online"]:
             return [LLM_MODEL, EMBEDDING_MODEL]
 
-        installed = set(status["models"])
         missing = []
         for required in (LLM_MODEL, EMBEDDING_MODEL):
-            if required not in installed:
+            if not ollama_model_is_installed(required, status["models"]):
                 missing.append(required)
         return missing
 

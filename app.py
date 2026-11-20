@@ -4,7 +4,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from rag_engine import LocalRAGEngine, RAGError
+from rag_engine import LocalRAGEngine, RAGError, ollama_model_is_installed
 from settings import (
     DOCUMENTS_DIR,
     EMBEDDING_MODEL,
@@ -67,9 +67,9 @@ with st.sidebar:
         st.error("Ollama is offline")
         st.caption("Open the Ollama desktop application and refresh this page.")
 
-    installed = set(status.get("models", []))
-    llm_ready = LLM_MODEL in installed
-    embed_ready = EMBEDDING_MODEL in installed
+    installed = status.get("models", [])
+    llm_ready = ollama_model_is_installed(LLM_MODEL, installed)
+    embed_ready = ollama_model_is_installed(EMBEDDING_MODEL, installed)
     st.write(f"{'✅' if llm_ready else '⬜'} Generator: `{LLM_MODEL}`")
     st.write(f"{'✅' if embed_ready else '⬜'} Embeddings: `{EMBEDDING_MODEL}`")
     if status["online"] and not (llm_ready and embed_ready):

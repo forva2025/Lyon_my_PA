@@ -14,13 +14,13 @@ A small, local Retrieval-Augmented Generation (RAG) project for Windows. It lets
 
 ## Screenshots
 
-### Lyon Assistant loading view
+### Lyon Assistant RAG interface
 
-![Lyon Assistant loading view](docs/images/lyon-assistant-model-status.png)
+![Lyon Assistant RAG interface showing Ollama and both local models ready](docs/images/lyon-assistant-model-status.png)
 
-After loading, the sidebar reports the Ollama service, generator, embedding
-model, document uploader and knowledge-base controls. The main area provides
-the document-grounded chat interface and source citations.
+The live interface shows Ollama running with the generator and embedding models
+ready. The sidebar contains the document uploader and knowledge-base controls;
+the main area provides the document-grounded chat interface and source citations.
 
 ## 1. What is included
 
@@ -63,19 +63,8 @@ ollama list
 The project uses `qwen3:1.7b` to generate answers and `nomic-embed-text` to embed documents and questions.
 
 > **Ollama model-tag note:** Ollama may display an implicit `:latest` tag as
-> `nomic-embed-text:latest`. The current app compares installed model names
-> exactly, while its default setting is `nomic-embed-text`. If both models are
-> visible in `ollama list` but the app still says the embedding model is missing,
-> use the temporary PowerShell workaround below before starting Streamlit:
-
-```powershell
-$env:RAG_EMBEDDING_MODEL = "nomic-embed-text:latest"
-.venv\Scripts\python.exe -m streamlit run app.py
-```
-
-This environment variable affects only that PowerShell session. A permanent
-project-level alternative is to set `EMBEDDING_MODEL` to
-`nomic-embed-text:latest` in `settings.py`.
+> `nomic-embed-text:latest`. The app normalizes omitted `:latest` tags when it
+> checks installed models, so both names are treated as the same model.
 
 ## 4. Install the Python project
 
@@ -150,11 +139,9 @@ Open the Ollama desktop app. In PowerShell, try `ollama list`. The local service
 
 Run the two `ollama pull` commands above. The model names in `settings.py` must match the installed tags.
 
-If `ollama list` already shows both models, compare the full names including
-tags. In particular, `nomic-embed-text` in `settings.py` does not exactly match
-`nomic-embed-text:latest` returned by current Ollama versions. Use the
-environment-variable workaround in section 3 or update the setting to the full
-installed tag.
+If `ollama list` already shows both models, refresh the Streamlit page or restart
+`run_windows.bat` so the app reloads the latest source code. The app treats an
+omitted `:latest` tag and an explicit `:latest` tag as equivalent.
 
 **Not enough memory / model fails to load**
 

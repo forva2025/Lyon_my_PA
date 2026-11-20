@@ -1,5 +1,5 @@
 # Python 3.11 (64-bit) is recommended on Windows.
-streamlit>=1.39,<2
+streamlit>=1.63,<2
 chromadb>=0.5,<2
 requests>=2.31,<3
 pypdf>=5,<7

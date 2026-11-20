@@ -81,6 +81,8 @@ with st.sidebar:
         "Choose PDF, DOCX or TXT files",
         type=["pdf", "docx", "txt"],
         accept_multiple_files=True,
+        key="document_uploads",
+        max_upload_size=MAX_UPLOAD_MB,
         help=f"Maximum {MAX_UPLOAD_MB} MB per file.",
     )
     models_ready = status["online"] and llm_ready and embed_ready

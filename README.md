@@ -1,7 +1,7 @@
 # Lyon My PA — Local RAG Assistant
 
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.39%2B-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.63%2B-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Ollama](https://img.shields.io/badge/Ollama-local_models-000000?logo=ollama&logoColor=white)](https://ollama.com/)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-local_vector_store-FF6F61)](https://www.trychroma.com/)
 [![Platform](https://img.shields.io/badge/Platform-Windows_10%2F11-0078D4?logo=windows&logoColor=white)](https://www.microsoft.com/windows/)
@@ -158,6 +158,13 @@ Close any other running copy of this app. Do not manually edit files inside `dat
 **Port 8501 is already in use**
 
 Run `python -m streamlit run app.py --server.port 8502` from the activated environment.
+
+**File upload shows `AxiosError: Request failed with status code 400`**
+
+Close every old Lyon Assistant browser tab, stop any other copy of the app, and
+start it again with `run_windows.bat`. Open the new `http://127.0.0.1:8501`
+tab created by that run. Streamlit returns this error when a stale browser tab
+tries to upload with a session ID from a server process that has already stopped.
 
 ## 10. Run the small local tests
 

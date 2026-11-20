@@ -1,8 +1,26 @@
-# Local RAG Assistant
+# Lyon My PA — Local RAG Assistant
+
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.39%2B-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Ollama](https://img.shields.io/badge/Ollama-local_models-000000?logo=ollama&logoColor=white)](https://ollama.com/)
+[![ChromaDB](https://img.shields.io/badge/ChromaDB-local_vector_store-FF6F61)](https://www.trychroma.com/)
+[![Platform](https://img.shields.io/badge/Platform-Windows_10%2F11-0078D4?logo=windows&logoColor=white)](https://www.microsoft.com/windows/)
+[![Runs locally](https://img.shields.io/badge/AI-Runs_locally-success)](#requirements)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A small, local Retrieval-Augmented Generation (RAG) project for Windows. It lets you upload PDF, DOCX and TXT documents, stores their embeddings in a local ChromaDB database, retrieves relevant chunks, and asks a local Ollama model to answer questions using that context.
 
 **No paid LLM API, API key or cloud vector database is required.** After downloading the models, document indexing and question answering run on your computer.
+
+## Screenshots
+
+### Lyon Assistant loading view
+
+![Lyon Assistant loading view](docs/images/lyon-assistant-model-status.png)
+
+After loading, the sidebar reports the Ollama service, generator, embedding
+model, document uploader and knowledge-base controls. The main area provides
+the document-grounded chat interface and source citations.
 
 ## 1. What is included
 
@@ -43,6 +61,21 @@ ollama list
 ```
 
 The project uses `qwen3:1.7b` to generate answers and `nomic-embed-text` to embed documents and questions.
+
+> **Ollama model-tag note:** Ollama may display an implicit `:latest` tag as
+> `nomic-embed-text:latest`. The current app compares installed model names
+> exactly, while its default setting is `nomic-embed-text`. If both models are
+> visible in `ollama list` but the app still says the embedding model is missing,
+> use the temporary PowerShell workaround below before starting Streamlit:
+
+```powershell
+$env:RAG_EMBEDDING_MODEL = "nomic-embed-text:latest"
+.venv\Scripts\python.exe -m streamlit run app.py
+```
+
+This environment variable affects only that PowerShell session. A permanent
+project-level alternative is to set `EMBEDDING_MODEL` to
+`nomic-embed-text:latest` in `settings.py`.
 
 ## 4. Install the Python project
 
@@ -116,6 +149,12 @@ Open the Ollama desktop app. In PowerShell, try `ollama list`. The local service
 **Model missing**
 
 Run the two `ollama pull` commands above. The model names in `settings.py` must match the installed tags.
+
+If `ollama list` already shows both models, compare the full names including
+tags. In particular, `nomic-embed-text` in `settings.py` does not exactly match
+`nomic-embed-text:latest` returned by current Ollama versions. Use the
+environment-variable workaround in section 3 or update the setting to the full
+installed tag.
 
 **Not enough memory / model fails to load**
 

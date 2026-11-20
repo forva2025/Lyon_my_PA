@@ -48,7 +48,7 @@ def display_sources(sources: list[dict]) -> None:
             st.caption(source["text"][:700] + ("…" if len(source["text"]) > 700 else ""))
 
 
-st.title("📚 Local RAG Assistant")
+st.title("📚 Lyon RAG Assistant")
 st.caption("Ask questions about your own documents. Models and vector storage run on this computer.")
 
 try:

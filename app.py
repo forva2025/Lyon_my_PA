@@ -16,7 +16,7 @@ from settings import (
 
 
 st.set_page_config(
-    page_title="Local RAG Assistant",
+    page_title="Lyon My PA",
     page_icon="📚",
     layout="wide",
     initial_sidebar_state="expanded",
